@@ -2,95 +2,299 @@
 <html lang="cs">
 <head>
     <meta charset="UTF-8">
-    <title>StarSMP.eu – Minecraft PvP Server</title>
+    <title>StarSMP.eu – PvP Minecraft Server</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="StarSMP.eu – Nejnapínavější PvP Minecraft server zaměřený na klanové války, týmové bitvy a akční komunitní zážitky. Připoj se k nám!">
     <style>
-        body { font-family: 'Segoe UI', Arial, sans-serif; margin:0; background:#181818; color:#f6f6f6; }
-        header { background: #222d3e; padding: 32px 0 18px 0; text-align: center; }
-        h1 { margin:0 0 8px 0; font-size:2.2em; text-shadow: 0 2px 8px rgba(0,0,0,0.24);}
-        h2 { margin:25px 0 8px 0; color:#ff7052; }
-        nav { margin:0; text-align:center; padding:10px;}
-        nav a { color:#ff7052; text-decoration:none; margin:0 12px; font-weight:600; font-size: 1.04em; }
-        .container { max-width: 800px; margin: 0 auto; padding: 25px; }
-        .card { background: #232939; border-radius:14px; box-shadow:0 0 10px rgba(0,0,0,0.10); padding:22px 28px 20px 28px; margin-bottom:24px; }
-        ul { list-style: none; padding: 0; }
-        ul li { margin-bottom: 9px; }
-        .team-list { display: flex; flex-wrap: wrap; gap:18px;}
-        .team-item { flex: 1 1 200px; background: #242c3e; border-radius:10px; padding:10px 15px; margin-bottom:0;}
-        .footer { color:#ccc; text-align:center; padding:20px; font-size:0.99em; border-top:1px solid #26354a; background: #202a38; margin-top:50px;}
-        .button { display:inline-block; padding:10px 24px; background:#ff7052; color:#fff; border-radius:7px; text-decoration:none; font-weight:600; transition:background 0.2s;}
-        .button:hover { background: #e5482e; color:#fff; }
-        .minigames { font-size:1.09em; margin:10px 0 14px 0; color:#fff1a8;}
+        :root {
+            --main-bg: #191a24;
+            --card-bg: #222436;
+            --accent: #ff7052;
+            --accent2: #fff1a8;
+            --nav-link: #ff7052;
+            --text: #f6f6f6;
+            --button-hover: #e5482e;
+            --team-label: #ffa594;
+            --team-name: #ffd0c1;
+            --team-role: #fff1a8;
+        }
+        body {
+            background: var(--main-bg);
+            color: var(--text);
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            min-height: 100vh;
+        }
+        header {
+            background: linear-gradient(90deg, #222d3e 60%, #231b36 100%);
+            text-align: center;
+            padding: 40px 10px 24px 10px;
+            box-shadow: 0 4px 24px rgba(20,20,40,0.13);
+        }
+        h1 {
+            margin:0 0 10px 0;
+            font-size:2.8em;
+            letter-spacing:2px;
+            color: var(--accent);
+            font-weight: bold;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.31);
+        }
+        .subtitle {
+            font-size: 1.22em;
+            color: var(--accent2);
+            margin-bottom:6px;
+        }
+        nav {
+            margin:20px auto 0;
+        }
+        nav a {
+            color: var(--nav-link);
+            text-decoration:none;
+            margin:0 18px;
+            font-weight:600;
+            font-size: 1.1em;
+            letter-spacing: 1px;
+            transition: color .16s;
+        }
+        nav a:hover { color: #ffd0c1; }
+        .container {
+            max-width: 920px;
+            margin: 33px auto 0;
+            padding: 0 10px;
+        }
+        .card {
+            background: var(--card-bg);
+            border-radius:18px;
+            box-shadow:0 4px 18px rgba(20,20,40,0.07);
+            padding:26px 34px 20px 34px;
+            margin-bottom: 28px;
+        }
+        .big-action {
+            background: linear-gradient(90deg, #ff7052 60%, #ffb671 100%);
+            color: #181818;
+            border-radius: 12px;
+            margin: 22px 0 12px 0;
+            padding: 19px 24px;
+            font-size: 1.21em;
+            text-align: center;
+            font-weight: bold;
+            letter-spacing: 1px;
+            box-shadow: 0 2px 26px rgba(200,80,60,0.2);
+        }
+        .ip-box{
+            font-size: 1.2em;
+            margin:16px 0 0 0;
+            background: #181819;
+            border:2px dashed var(--accent);
+            border-radius:7px; padding:13px 19px;
+            display:inline-block;
+            color: var(--accent);
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        h2 {
+            margin:30px 0 16px 0;
+            color: var(--accent);
+            font-size:1.36em;
+            letter-spacing: 1px;
+        }
+        .about-list ul{
+            margin:18px 0 0 0;
+            padding:0 0 0 17px;
+        }
+        .about-list li {
+            margin-bottom: 9px;
+            font-size: 1.04em;
+        }
+        .feature-highlight {
+            background: #242c3e;
+            border-radius: 12px;
+            padding: 14px 20px;
+            margin-top: 15px;
+            margin-bottom: 6px;
+            font-size: 1.07em;
+            color: var(--accent2);
+            font-weight: 500;
+        }
+        .team-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap:18px;
+        }
+        .team-person {
+            background: #1d212f;
+            border-radius:11px;
+            flex: 1 1 200px;
+            padding:17px 16px 13px 16px;
+            margin-bottom:0;
+            border-left:5px solid var(--accent);
+            box-shadow: 0 0 6px rgba(0,0,0,0.04);
+        }
+        .team-label { color: var(--team-label); font-weight: 700; letter-spacing: 0.4px; }
+        .team-name { font-size: 1.13em; color: var(--team-name); font-weight: 600;}
+        .team-role {font-size: 0.99em; color: var(--team-role);}
+        .minigames {
+            background: #29223c;
+            color: var(--accent2);
+            border-radius:10px;
+            padding:16px 20px;
+            margin-bottom:18px;
+            font-weight: 600;
+            font-size:1.12em;
+            text-align:center;
+            box-shadow: 0 0 8px #ff6e5240;
+        }
+        .cta-box{
+            margin: 0 auto 16px auto;
+            background: #872c1a;
+            color: #fff;
+            border-radius:10px;
+            padding:18px 18px 12px 18px;
+            text-align:center;
+            font-size: 1.12em;
+            font-weight: 600;
+            box-shadow: 0 0 10px rgba(255,112,82,0.18);
+        }
+        a.button {
+            display:inline-block; margin:12px auto 0;
+            padding:12px 30px; background:var(--accent); color:#191a24;
+            border-radius:8px; text-decoration:none; font-weight:700; font-size:1.06em;
+            transition:background 0.18s, color 0.15s;
+            box-shadow: 0 0 8px #ff6e5224;
+            letter-spacing: 1px;
+        }
+        a.button:hover { background: var(--button-hover); color:#fff;}
+        .contact-links a {
+            color: var(--accent);
+            text-decoration:underline;
+        }
+        .footer {
+            color:#b9b3ab;
+            text-align:center;
+            padding:22px 15px 20px 15px;
+            font-size:1em;
+            background: #202a38;
+            margin-top:35px;
+            border-top:1px solid #26354a;
+        }
+        @media (max-width: 950px){
+            .container{padding:0 3px}
+            .card{padding: 18px 9px 14px 9px;}
+        }
         @media (max-width: 700px){
-            .container {padding:10px;}
-            .team-list { flex-direction:column;}
+            .team-grid { flex-direction:column;}
         }
     </style>
 </head>
 <body>
 <header>
     <h1>StarSMP.eu</h1>
-    <div style="font-size: 1.13em; color:#ffb698;">
-        Český Minecraft PvP server – klanové války & turnaje
-    </div>
+    <div class="subtitle">Čistě PvP Minecraft server • Klanové války • Intenzivní komunitní PvP</div>
     <nav>
         <a href="#about">O serveru</a>
+        <a href="#features">Výhody</a>
+        <a href="#minigames">Klanové války</a>
         <a href="#team">Tým</a>
-        <a href="#minigames">PvP módy</a>
         <a href="#contact">Komunita</a>
     </nav>
 </header>
 
 <div class="container">
+
     <section id="about" class="card">
         <h2>O serveru</h2>
-        <p>
-        StarSMP.eu je čistě PvP server zaměřený na klanové války, organizované turnaje a intenzivní hráčskou soutěživost. Zapoj se do klanů, bojuj o nadvládu na mapě, rozvíjej taktiky a staň se legendou PvP scény! Naším cílem je nabídnout spravedlivé, akční a zábavné prostředí pro všechny fandy PvP Minecraftu.
-        </p>
-        <p>
-        <b>Připoj se – IP adresa: <span style="color:#ff7052;">play.starsmp.eu</span></b>
-        </p>
-        <a class="button" href="#contact">Připojit se</a>
+        <div class="big-action">
+            Připoj se do epických bitvy mezi hráči – PvP je u nás absolutní priorita!
+        </div>
+        <div class="ip-box">
+            IP: play.starsmp.eu
+        </div>
+        <div class="about-list">
+            <ul>
+                <li>Zkušený hlavní admin, aktivní tým a spravedlivá pravidla.</li>
+                <li>Výhradně PvP zaměření – žádný survival, jen boj a soutěžení!</li>
+                <li>Strategické klanové války: spoj se s hráči a útoč na území soupeřů.</li>
+                <li>Arénové PvP módy a pravidelné turnaje s odměnami.</li>
+                <li>Respektující komunita hráčů, pravidelné akce a vylepšování serveru.</li>
+            </ul>
+        </div>
     </section>
 
-    <section id="team" class="card">
-        <h2>Tým serveru</h2>
-        <div class="team-list">
-            <div class="team-item"><b>Majitelé:</b><br>ownedbyshade, paldes12</div>
-            <div class="team-item"><b>Hlavní Admin:</b><br>Tucnaczech</div>
-            <div class="team-item"><b>Hlavní Builder:</b><br>RuzovyKrtek</div>
-            <div class="team-item"><b>Helper:</b><br>SaliClientV2</div>
-            <div class="team-item"><b>El. Developer:</b><br>Ar0n1s_</div>
+    <section id="features" class="card">
+        <h2>Proč hrát u nás?</h2>
+        <div class="feature-highlight">
+            • Unikátní systém klanů, kde můžeš dobývat, bránit i expandovat<br>
+            • PvP mechaniky bez kompromisů – důraz na férové souboje a taktiku<br>
+            • Žádné Pay2Win – veškeré výhody získáš dovednostmi a účastí v eventech<br>
+            • Týmový voice chat na Discordu, aktivní pomoc moderátorů<br>
         </div>
+        <div class="cta-box">
+            Hledáš místo, kde PvP znamená skutečnou výzvu? StarSMP.eu tě posune dál!
+        </div>
+        <a href="#contact" class="button">Připojit se na Discord</a>
     </section>
 
     <section id="minigames" class="card">
-        <h2>PvP módy a klanové války</h2>
+        <h2>Klanové války & PvP režimy</h2>
         <div class="minigames">
-            <b>Klanové války</b>, <b>arena PvP</b>, <b>PvP eventy</b>
+            <b>Klanové války</b> jsou hlavní herní náplní! Závoď v týmovém PvP a bojuj o území, prestiž i odměny.
         </div>
         <ul>
-            <li><b>Klanové války:</b> Zasvětíš se do týmové strategie, obrany základny i ofenzivních útoků na soupeře!</li>
-            <li><b>Arena PvP:</b> Rychlé duely 1v1, 2v2 nebo větší souboje o prestiž, odměny a žebříček serveru.</li>
-            <li><b>Turnaje & eventy:</b> Pravidelné speciální PvP eventy, challenge a žhavé klanové bitvy každou sezónu!</li>
+            <li><b>Klanové války:</b> Vytvoř nebo se přidej ke klanu a strategicky dobývej území! Hromada možností pro taktizování a spolupráci.</li>
+            <li><b>Arénové PvP:</b> Okamžité duely, masivní bitvy, prestižní souboje i speciální challenge módy.</li>
+            <li><b>Turnaje a Eventy:</b> PvP žebříčky, bodování klanů, jedinečné eventy s parádními odměnami!</li>
         </ul>
+    </section>
+
+    <section id="team" class="card">
+        <h2>Tým StarSMP.eu</h2>
+        <div class="team-grid">
+            <div class="team-person">
+                <div class="team-label">HLAVNÍ ADMIN</div>
+                <div class="team-name">Tucnaczech</div>
+                <div class="team-role">(koordinace a spravedlnost serveru)</div>
+            </div>
+            <div class="team-person">
+                <div class="team-label">MAJITELÉ</div>
+                <div class="team-name">ownedbyshade</div>
+                <div class="team-name">paldes12</div>
+                <div class="team-role">(rozvoj projektu, rozhodování, eventy)</div>
+            </div>
+            <div class="team-person">
+                <div class="team-label">HLAVNÍ BUILDER</div>
+                <div class="team-name">RuzovyKrtek</div>
+                <div class="team-role">(mapy, PvP arény, kreativní design)</div>
+            </div>
+            <div class="team-person">
+                <div class="team-label">HELPER</div>
+                <div class="team-name">SaliClientV2</div>
+                <div class="team-role">(podpora hráčů, řešení dotazů)</div>
+            </div>
+            <div class="team-person">
+                <div class="team-label">EL. DEVELOPER</div>
+                <div class="team-name">Ar0n1s_</div>
+                <div class="team-role">(pluginy, PvP systémy, automatizace)</div>
+            </div>
+        </div>
     </section>
 
     <section id="contact" class="card">
         <h2>Komunita & kontakty</h2>
-        <p>
-        Připoj se na náš komunitní Discord a sleduj novinky, eventy a dění na serveru:<br>
-        <b>Discord:</b> <a href="https://dsc.gg/starsmp" target="_blank" style="color:#ff7052;">dsc.gg/starsmp</a><br>
-        <b>E-mail:</b> <a href="mailto:info@starsmp.eu" style="color:#ff7052;">info@starsmp.eu</a>
-        </p>
-        <p>
-        Sleduj nás také na sociálních sítích pro více PvP klipů a informací!
-        </p>
+        <div class="cta-box">
+            Potřebuješ pomoc, chceš se přidat, nebo máš dotaz? Jsme tu pro tebe na Discordu!
+        </div>
+        <div class="contact-links">
+            <b>Discord:</b>
+            <a href="https://dsc.gg/starsmp" target="_blank">dsc.gg/starsmp</a><br>
+            <b>E-mail:</b>
+            <a href="mailto:info@starsmp.eu">info@starsmp.eu</a>
+        </div>
+        <p style="margin-top:11px;font-size:1.02em;">Následuj nás také na sociálních sítích a měj přehled o novinkách, PvP klipech a nových eventech!</p>
     </section>
 </div>
 
 <div class="footer">
-    &copy; 2025 StarSMP.eu — PvP komunita. Všechna práva vyhrazena.
+    &copy; 2025 StarSMP.eu — Výhradně PvP server s klanovými válkami. Všechna práva vyhrazena.
 </div>
 </body>
 </html>
