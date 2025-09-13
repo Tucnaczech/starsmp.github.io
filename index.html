@@ -2,299 +2,238 @@
 <html lang="cs">
 <head>
     <meta charset="UTF-8">
-    <title>StarSMP.eu – PvP Minecraft Server</title>
+    <title>StarSMP.eu – PvP Minecraft server</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="StarSMP.eu – Nejnapínavější PvP Minecraft server zaměřený na klanové války, týmové bitvy a akční komunitní zážitky. Připoj se k nám!">
     <style>
         :root {
             --main-bg: #191a24;
-            --card-bg: #222436;
             --accent: #ff7052;
-            --accent2: #fff1a8;
-            --nav-link: #ff7052;
-            --text: #f6f6f6;
-            --button-hover: #e5482e;
-            --team-label: #ffa594;
-            --team-name: #ffd0c1;
-            --team-role: #fff1a8;
+            --accent-light: #fff1a8;
+            --card: #232939;
+            --whiteish: #f7f7fa;
+            --darker: #121019;
         }
-        body {
+        html, body {
+            margin:0; padding:0;
             background: var(--main-bg);
-            color: var(--text);
+            color: var(--whiteish);
             font-family: 'Segoe UI', Arial, sans-serif;
-            margin: 0;
-            min-height: 100vh;
+            min-height:100vh;
         }
-        header {
-            background: linear-gradient(90deg, #222d3e 60%, #231b36 100%);
-            text-align: center;
-            padding: 40px 10px 24px 10px;
-            box-shadow: 0 4px 24px rgba(20,20,40,0.13);
+        body { display:flex; flex-direction:column; min-height:100vh;}
+        .content { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding: 0 5vw;}
+        .card {
+            background: var(--card);
+            border-radius:19px;
+            padding: 2.3em 2em 1.5em 2em;
+            max-width: 550px;
+            width:100%;
+            margin-top: 28px;
+            margin-bottom:12px;
+            box-shadow: 0 8px 36px rgba(0,0,0,0.17);
+            display: none;
+            animation: fadeinUp .6s;
+        }
+        .card.active { display:block; }
+        @keyframes fadeinUp {
+            0% {transform:translateY(40px); opacity:0}
+            100% {transform:translateY(0); opacity:1}
         }
         h1 {
-            margin:0 0 10px 0;
-            font-size:2.8em;
-            letter-spacing:2px;
+            font-size: 2.6em;
+            margin: 0 0 10px 0;
+            text-align:center;
             color: var(--accent);
-            font-weight: bold;
-            text-shadow: 0 2px 12px rgba(0,0,0,0.31);
+            letter-spacing: 2px;
+            text-shadow: 0 2px 13px rgba(40,20,20,0.19);
         }
         .subtitle {
-            font-size: 1.22em;
-            color: var(--accent2);
-            margin-bottom:6px;
+            text-align:center;
+            margin-bottom: 13px;
+            font-size: 1.25em;
+            color: var(--accent-light);
         }
-        nav {
-            margin:20px auto 0;
+        .emoji {font-size:1.5em; vertical-align:middle;}
+        img.hero-img {
+            width: 92%; max-width: 420px; border-radius:14px; margin:1em 0 1em 0;
+            box-shadow: 0 2px 22px rgba(255,96,82,0.07);
+            display:block;
+            margin-left:auto;margin-right:auto;
         }
-        nav a {
-            color: var(--nav-link);
-            text-decoration:none;
-            margin:0 18px;
-            font-weight:600;
-            font-size: 1.1em;
-            letter-spacing: 1px;
-            transition: color .16s;
-        }
-        nav a:hover { color: #ffd0c1; }
-        .container {
-            max-width: 920px;
-            margin: 33px auto 0;
-            padding: 0 10px;
-        }
-        .card {
-            background: var(--card-bg);
-            border-radius:18px;
-            box-shadow:0 4px 18px rgba(20,20,40,0.07);
-            padding:26px 34px 20px 34px;
-            margin-bottom: 28px;
-        }
-        .big-action {
-            background: linear-gradient(90deg, #ff7052 60%, #ffb671 100%);
-            color: #181818;
-            border-radius: 12px;
-            margin: 22px 0 12px 0;
-            padding: 19px 24px;
-            font-size: 1.21em;
-            text-align: center;
-            font-weight: bold;
-            letter-spacing: 1px;
-            box-shadow: 0 2px 26px rgba(200,80,60,0.2);
-        }
-        .ip-box{
-            font-size: 1.2em;
-            margin:16px 0 0 0;
-            background: #181819;
-            border:2px dashed var(--accent);
-            border-radius:7px; padding:13px 19px;
+        .ip-box {
             display:inline-block;
-            color: var(--accent);
-            font-weight: bold;
+            margin: 25px auto 10px auto;
+            padding: 8px 16px;
+            font-size: 1.15em; font-weight:bold; background: #181819; border-radius:8px; color:var(--accent);
+            border: 1.8px dashed var(--accent-light);
             letter-spacing: 1px;
         }
-        h2 {
-            margin:30px 0 16px 0;
+        .main-buttons {
+            display:flex; gap: 17px;
+            justify-content:center;
+            margin:35px 0 7px 0;
+        }
+        .main-buttons button {
+            padding: 13px 24px;
+            font-size:1.01em;
+            border-radius:7px;
+            background: var(--card);
             color: var(--accent);
-            font-size:1.36em;
-            letter-spacing: 1px;
+            border:2px solid var(--accent);
+            font-weight:bold;
+            cursor:pointer;
+            transition: background .17s, color .13s, border .14s;
         }
-        .about-list ul{
-            margin:18px 0 0 0;
-            padding:0 0 0 17px;
+        .main-buttons button.active, .main-buttons button:focus {
+            background: var(--accent);
+            color: var(--darker);
+            border-color:var(--accent-light);
         }
-        .about-list li {
-            margin-bottom: 9px;
-            font-size: 1.04em;
+        .main-buttons button:hover { color:#fff; background: #ff8b70;}
+        .list-emoji{font-size:1.1em;margin-right:7px;}
+        .team-grid{
+            margin-top: 18px;
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:14px;
         }
-        .feature-highlight {
-            background: #242c3e;
-            border-radius: 12px;
-            padding: 14px 20px;
-            margin-top: 15px;
-            margin-bottom: 6px;
-            font-size: 1.07em;
-            color: var(--accent2);
-            font-weight: 500;
+        .team-item{
+            background:#181819; border-radius:9px; padding:14px 13px 12px 15px;
+            color:var(--accent-light);
+            box-shadow: 0 2px 14px #11101428;
         }
-        .team-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap:18px;
-        }
-        .team-person {
-            background: #1d212f;
-            border-radius:11px;
-            flex: 1 1 200px;
-            padding:17px 16px 13px 16px;
-            margin-bottom:0;
-            border-left:5px solid var(--accent);
-            box-shadow: 0 0 6px rgba(0,0,0,0.04);
-        }
-        .team-label { color: var(--team-label); font-weight: 700; letter-spacing: 0.4px; }
-        .team-name { font-size: 1.13em; color: var(--team-name); font-weight: 600;}
-        .team-role {font-size: 0.99em; color: var(--team-role);}
-        .minigames {
-            background: #29223c;
-            color: var(--accent2);
-            border-radius:10px;
-            padding:16px 20px;
-            margin-bottom:18px;
-            font-weight: 600;
-            font-size:1.12em;
+        .team-role{ font-size:1.08em; color:var(--accent);}
+        .team-name{font-size:1.15em;font-weight:600;letter-spacing:1px;}
+        .team-desc{font-size:.98em;color:#ffe2af;}
+        .heroic-cta {
+            padding: 10px 0 8px 0;
             text-align:center;
-            box-shadow: 0 0 8px #ff6e5240;
+            font-size: 1.14em;
+            font-weight:600;
+            color: #ffa98d;
         }
-        .cta-box{
-            margin: 0 auto 16px auto;
-            background: #872c1a;
-            color: #fff;
-            border-radius:10px;
-            padding:18px 18px 12px 18px;
-            text-align:center;
-            font-size: 1.12em;
-            font-weight: 600;
-            box-shadow: 0 0 10px rgba(255,112,82,0.18);
+        .gallery {
+            margin:20px 0 20px 0;
+            display:flex;
+            justify-content:center;
+            gap:20px;
+            flex-wrap:wrap;
         }
-        a.button {
-            display:inline-block; margin:12px auto 0;
-            padding:12px 30px; background:var(--accent); color:#191a24;
-            border-radius:8px; text-decoration:none; font-weight:700; font-size:1.06em;
-            transition:background 0.18s, color 0.15s;
-            box-shadow: 0 0 8px #ff6e5224;
-            letter-spacing: 1px;
+        .gallery img{ max-width:180px; border-radius:13px; box-shadow:0 0 6px #0005;}
+        .contact-info{
+            text-align:center; margin-top:8px; font-size:1.13em;
         }
-        a.button:hover { background: var(--button-hover); color:#fff;}
-        .contact-links a {
-            color: var(--accent);
-            text-decoration:underline;
+        .discord-link{
+            color:var(--accent);
+            font-weight:700; text-decoration:none;
         }
-        .footer {
+        .footer{
             color:#b9b3ab;
             text-align:center;
-            padding:22px 15px 20px 15px;
-            font-size:1em;
-            background: #202a38;
-            margin-top:35px;
-            border-top:1px solid #26354a;
+            padding:18px 7px 15px 7px;
+            font-size:0.99em;
+            background: #202a38; margin-top:7px;
+            border-top:1.2px solid #33374c;
         }
-        @media (max-width: 950px){
-            .container{padding:0 3px}
-            .card{padding: 18px 9px 14px 9px;}
-        }
-        @media (max-width: 700px){
-            .team-grid { flex-direction:column;}
+        @media (max-width:600px){
+            .card{padding:1.1em 7vw 1em 7vw;}
+            .team-grid{grid-template-columns:1fr;}
         }
     </style>
 </head>
 <body>
-<header>
-    <h1>StarSMP.eu</h1>
-    <div class="subtitle">Čistě PvP Minecraft server • Klanové války • Intenzivní komunitní PvP</div>
-    <nav>
-        <a href="#about">O serveru</a>
-        <a href="#features">Výhody</a>
-        <a href="#minigames">Klanové války</a>
-        <a href="#team">Tým</a>
-        <a href="#contact">Komunita</a>
-    </nav>
-</header>
+    <div class="content">
 
-<div class="container">
+        <h1 class="emoji">StarSMP.eu ⚔️</h1>
+        <div class="subtitle">PvP klanové války • Bez survivalu • Minecraft 1.20+</div>
 
-    <section id="about" class="card">
-        <h2>O serveru</h2>
-        <div class="big-action">
-            Připoj se do epických bitvy mezi hráči – PvP je u nás absolutní priorita!
-        </div>
-        <div class="ip-box">
-            IP: play.starsmp.eu
-        </div>
-        <div class="about-list">
+        <div id="home" class="card active">
+            <img src="https://cdn.pixabay.com/photo/2017/01/31/13/14/minecraft-2025593_1280.png" alt="PvP arena" class="hero-img"/>
+            <div class="ip-box">IP: play.starsmp.eu</div>
+            <div class="heroic-cta">Zažij PvP bitvy na úrovni! Založ klan, rozdrť soupeře, ovládni leaderboard! 🏆</div>
             <ul>
-                <li>Zkušený hlavní admin, aktivní tým a spravedlivá pravidla.</li>
-                <li>Výhradně PvP zaměření – žádný survival, jen boj a soutěžení!</li>
-                <li>Strategické klanové války: spoj se s hráči a útoč na území soupeřů.</li>
-                <li>Arénové PvP módy a pravidelné turnaje s odměnami.</li>
-                <li>Respektující komunita hráčů, pravidelné akce a vylepšování serveru.</li>
+                <li><span class="list-emoji">🤝</span> Týmová spolupráce v reálném čase</li>
+                <li><span class="list-emoji">⚔️</span> Rychlé duely i masové klanové boje</li>
+                <li><span class="list-emoji">🏅</span> Exkluzivní eventy & výzvy</li>
+                <li><span class="list-emoji">🎯</span> Žádný survival, jen boj a taktika</li>
             </ul>
         </div>
-    </section>
 
-    <section id="features" class="card">
-        <h2>Proč hrát u nás?</h2>
-        <div class="feature-highlight">
-            • Unikátní systém klanů, kde můžeš dobývat, bránit i expandovat<br>
-            • PvP mechaniky bez kompromisů – důraz na férové souboje a taktiku<br>
-            • Žádné Pay2Win – veškeré výhody získáš dovednostmi a účastí v eventech<br>
-            • Týmový voice chat na Discordu, aktivní pomoc moderátorů<br>
+        <div id="team" class="card">
+            <div class="emoji" style="font-size:2em;margin-bottom:7px;">👥</div>
+            <h2>Náš tým</h2>
+            <div class="team-grid">
+                <div class="team-item">
+                    <div class="team-role">HLAVNÍ ADMIN</div>
+                    <div class="team-name">Tucnaczech</div>
+                    <div class="team-desc">Koordinace serveru & férová PvP komunita</div>
+                </div>
+                <div class="team-item">
+                    <div class="team-role">MAJITELÉ</div>
+                    <div class="team-name">ownedbyshade</div>
+                    <div class="team-name">paldes12</div>
+                    <div class="team-desc">Vývoj, ochrana a směr projektu</div>
+                </div>
+                <div class="team-item">
+                    <div class="team-role">HL. BUILDER</div>
+                    <div class="team-name">RuzovyKrtek</div>
+                    <div class="team-desc">PvP mapy a arény design</div>
+                </div>
+                <div class="team-item">
+                    <div class="team-role">HELPER</div>
+                    <div class="team-name">SaliClientV2</div>
+                    <div class="team-desc">Podpora hráčů & řešení dotazů</div>
+                </div>
+                <div class="team-item">
+                    <div class="team-role">EL. DEVELOPER</div>
+                    <div class="team-name">Ar0n1s_</div>
+                    <div class="team-desc">Pluginy & PvP systémy</div>
+                </div>
+            </div>
+            <div style="margin-top:20px;text-align:center;font-size:1.05em;">Tým serveru <b>StarSMP.eu</b> je vždy aktivní a připravený řešit jakoukoli situaci!</div>
         </div>
-        <div class="cta-box">
-            Hledáš místo, kde PvP znamená skutečnou výzvu? StarSMP.eu tě posune dál!
-        </div>
-        <a href="#contact" class="button">Připojit se na Discord</a>
-    </section>
 
-    <section id="minigames" class="card">
-        <h2>Klanové války & PvP režimy</h2>
-        <div class="minigames">
-            <b>Klanové války</b> jsou hlavní herní náplní! Závoď v týmovém PvP a bojuj o území, prestiž i odměny.
+        <div id="gallery" class="card">
+            <div class="emoji" style="font-size:2em;margin-bottom:7px;">🖼️</div>
+            <h2>Galerie</h2>
+            <div class="gallery">
+                <img src="https://cdn.pixabay.com/photo/2016/10/18/17/46/minecraft-1755784_960_720.png" alt="Clan battle screenshot">
+                <img src="https://cdn.pixabay.com/photo/2022/09/16/16/33/minecraft-7459197_1280.jpg" alt="PvP Event">
+                <img src="https://cdn.pixabay.com/photo/2017/01/31/13/14/minecraft-2025593_960_720.png" alt="PvP Arena design">
+            </div>
+            <div style="margin-top:9px;text-align:center;color:#ffe2af;">Chceš zde své PvP momentky? Sdílej je na Discordu!</div>
         </div>
-        <ul>
-            <li><b>Klanové války:</b> Vytvoř nebo se přidej ke klanu a strategicky dobývej území! Hromada možností pro taktizování a spolupráci.</li>
-            <li><b>Arénové PvP:</b> Okamžité duely, masivní bitvy, prestižní souboje i speciální challenge módy.</li>
-            <li><b>Turnaje a Eventy:</b> PvP žebříčky, bodování klanů, jedinečné eventy s parádními odměnami!</li>
-        </ul>
-    </section>
 
-    <section id="team" class="card">
-        <h2>Tým StarSMP.eu</h2>
-        <div class="team-grid">
-            <div class="team-person">
-                <div class="team-label">HLAVNÍ ADMIN</div>
-                <div class="team-name">Tucnaczech</div>
-                <div class="team-role">(koordinace a spravedlnost serveru)</div>
-            </div>
-            <div class="team-person">
-                <div class="team-label">MAJITELÉ</div>
-                <div class="team-name">ownedbyshade</div>
-                <div class="team-name">paldes12</div>
-                <div class="team-role">(rozvoj projektu, rozhodování, eventy)</div>
-            </div>
-            <div class="team-person">
-                <div class="team-label">HLAVNÍ BUILDER</div>
-                <div class="team-name">RuzovyKrtek</div>
-                <div class="team-role">(mapy, PvP arény, kreativní design)</div>
-            </div>
-            <div class="team-person">
-                <div class="team-label">HELPER</div>
-                <div class="team-name">SaliClientV2</div>
-                <div class="team-role">(podpora hráčů, řešení dotazů)</div>
-            </div>
-            <div class="team-person">
-                <div class="team-label">EL. DEVELOPER</div>
-                <div class="team-name">Ar0n1s_</div>
-                <div class="team-role">(pluginy, PvP systémy, automatizace)</div>
+        <div id="contact" class="card">
+            <div class="emoji" style="font-size:2em;margin-bottom:7px;">💬</div>
+            <h2>Komunita & kontakt</h2>
+            <div class="contact-info">
+                Přidej se do našeho Discordu a staň se součástí naší PvP komunity!<br>
+                <a class="discord-link" href="https://dsc.gg/starsmp" target="_blank">dsc.gg/starsmp</a><br>
+                <span style="color:#ffe2af;">Nebo piš na e-mail:</span><br>
+                <a class="discord-link" href="mailto:info@starsmp.eu">info@starsmp.eu</a>
+                <div style="margin:12px 0 0 0;">Sleduj nás i na sociálních sítích — už žádná novinka ti neunikne!</div>
             </div>
         </div>
-    </section>
 
-    <section id="contact" class="card">
-        <h2>Komunita & kontakty</h2>
-        <div class="cta-box">
-            Potřebuješ pomoc, chceš se přidat, nebo máš dotaz? Jsme tu pro tebe na Discordu!
+        <div class="main-buttons">
+            <button type="button" class="active" onclick="switchTab('home', this)">🏠 Domů</button>
+            <button type="button" onclick="switchTab('team', this)">👥 Tým</button>
+            <button type="button" onclick="switchTab('gallery', this)">🖼️ Galerie</button>
+            <button type="button" onclick="switchTab('contact', this)">💬 Kontakt</button>
         </div>
-        <div class="contact-links">
-            <b>Discord:</b>
-            <a href="https://dsc.gg/starsmp" target="_blank">dsc.gg/starsmp</a><br>
-            <b>E-mail:</b>
-            <a href="mailto:info@starsmp.eu">info@starsmp.eu</a>
-        </div>
-        <p style="margin-top:11px;font-size:1.02em;">Následuj nás také na sociálních sítích a měj přehled o novinkách, PvP klipech a nových eventech!</p>
-    </section>
-</div>
-
-<div class="footer">
-    &copy; 2025 StarSMP.eu — Výhradně PvP server s klanovými válkami. Všechna práva vyhrazena.
-</div>
+    </div>
+    <div class="footer">
+        &copy; 2025 StarSMP.eu — PvP klanové války bez kompromisů.
+    </div>
+    <script>
+        function switchTab(tab, btn){
+            document.querySelectorAll('.card').forEach(x=>x.classList.remove('active'));
+            document.getElementById(tab).classList.add('active');
+            let buttons=document.querySelectorAll('.main-buttons button');
+            buttons.forEach(b=>b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+    </script>
 </body>
 </html>
