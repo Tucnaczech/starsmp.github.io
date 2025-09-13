@@ -2,294 +2,366 @@
 <html lang="cs">
 <head>
 <meta charset="UTF-8" />
-<title>StarSMP.eu – PvP Minecraft server</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>StarSMP.eu – PvP Minecraft server</title>
 <style>
 :root {
-    --main-bg: #191a24;
-    --accent: #ff7052;
-    --accent-light: #fff1a8;
-    --card: #232939;
-    --whiteish: #f7f7fa;
-    --darker: #121019;
-    --btn-bg: #2e3160;
-    --btn-active-bg: #ff7052;
-    --btn-active-color: #191a24;
+    --main-bg: #12131f;
+    --gradient-start: #ff7259;
+    --gradient-end: #ffbc7d;
+    --text-light: #f1f1f6;
+    --text-muted: #c7c7d9;
+    --card-bg: #1f2237;
+    --accent: #ff704d;
+    --accent-light: #ffd8b0;
+    --button-bg: #2c2f54;
+    --button-active-bg: #ff704d;
+    --button-hover-bg: #ff926e;
+    --shadow-glow: rgba(255, 112, 77, 0.33);
 }
-html, body {
+* {
+    box-sizing: border-box;
+}
+body {
     margin: 0; padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: var(--main-bg);
-    color: var(--whiteish);
-    font-family: 'Segoe UI', Arial, sans-serif;
-    min-height: 100vh;
-}
-body { display:flex; flex-direction: column; min-height: 100vh; }
-.content {
-    flex: 1;
+    color: var(--text-light);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 0 5vw 40px 5vw;
+    min-height: 100vh;
+}
+.content {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 24px 24px 80px;
+    flex-grow: 1;
 }
 header {
-    padding: 42px 0 14px 0;
-    width: 100%;
-    max-width: 920px;
     text-align: center;
+    margin-bottom: 30px;
     position: relative;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
 }
 .logo-placeholder {
-    width: 96px;
-    height: 96px;
-    margin: 0 auto 14px auto;
-    background: #3a3b55;
-    border-radius: 20px;
-    box-shadow: 0 0 15px #ff7052aa;
+    width: 110px;
+    height: 110px;
+    margin: 0 auto 14px;
+    border-radius: 50%;
+    padding: 0;
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    box-shadow: 0 0 18px 4px var(--shadow-glow);
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 40px;
+    font-size: 48px;
     font-weight: 900;
-    color: var(--accent-light);
+    color: #fff;
     user-select: none;
 }
 h1 {
-    margin: 7px 0 6px 0;
-    font-size: 2.9em;
+    font-size: 3.7rem;
+    letter-spacing: 5px;
+    margin: 12px 0 6px;
     font-weight: 900;
-    letter-spacing: 3.5px;
-    color: var(--accent);
-    text-shadow: 0 2px 11px rgba(40, 20, 20, 0.25);
+    color: var(--gradient-start);
+    text-shadow: 0 2px 14px rgba(255 112 77 / 0.5);
 }
 .subtitle {
-    font-size: 1.27em;
-    font-weight: 600;
+    font-size: 1.3rem;
+    font-weight: 700;
     color: var(--accent-light);
-    margin-bottom: 22px;
+    margin-bottom: 30px;
     user-select: none;
 }
 .main-buttons {
     display: flex;
-    gap: 16px;
     justify-content: center;
-    margin-bottom: 34px;
+    gap: 18px;
+    margin-bottom: 42px;
 }
 .main-buttons button {
-    background: var(--btn-bg);
+    background: var(--button-bg);
     border: none;
-    border-radius: 12px;
-    padding: 12px 26px;
-    font-weight: 700;
-    color: var(--accent);
-    font-size: 1.03em;
-    transition: background 0.25s, color 0.25s, box-shadow 0.25s;
     cursor: pointer;
+    border-radius: 16px;
+    padding: 14px 32px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent-light);
+    box-shadow: 0 0 12px #0008;
+    transition:
+        background 0.25s ease,
+        box-shadow 0.25s ease,
+        color 0.25s ease;
     user-select: none;
-    box-shadow: 0 0 8px 0 #0003;
+    filter: drop-shadow(0 0 1px rgba(0,0,0,0.9));
 }
 .main-buttons button.active,
 .main-buttons button:hover {
-    background: var(--btn-active-bg);
-    color: var(--btn-active-color);
-    box-shadow: 0 0 18px 1px #ff7052cc;
+    color: var(--main-bg);
+    background: var(--button-active-bg);
+    box-shadow: 0 0 18px 3px var(--shadow-glow);
 }
 .card {
-    background: var(--card);
-    border-radius: 22px;
-    max-width: 580px;
-    width: 100%;
-    padding: 2.1em 2.5em 2em 2.5em;
-    box-shadow: 0 10px 32px rgb(40 10 16 / 27%);
+    background: var(--card-bg);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    padding: 36px 34px 32px 34px;
+    max-width: 700px;
+    margin: 0 auto 56px;
     opacity: 0;
     max-height: 0;
     overflow: hidden;
-    transform: translateY(30px);
+    transform: translateY(45px);
     transition:
-        opacity 0.45s ease,
-        max-height 0.6s ease,
-        transform 0.45s ease;
+        opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+        max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .card.active {
     opacity: 1;
-    max-height: 1200px;
+    max-height: 2800px;
     transform: translateY(0);
     overflow: visible;
 }
 h2 {
-    font-size: 1.45em;
     color: var(--accent);
-    margin-bottom: 15px;
-    letter-spacing: 1.4px;
+    font-size: 1.68rem;
+    margin-bottom: 22px;
     user-select: none;
+    letter-spacing: 1.1px;
 }
 ul {
-    list-style-type: none;
-    padding-left: 0;
-    margin-top: 0.3em;
+    padding-left: 24px;
+    margin-top: 12px;
 }
 ul li {
+    font-size: 1.15rem;
+    margin-bottom: 14px;
     position: relative;
-    padding-left: 32px;
-    font-size: 1.06em;
-    margin-bottom: 10px;
+    line-height: 1.38;
     user-select: none;
-    line-height: 1.28em;
 }
-ul li::before {
-    content: '⚔️';
+ul li:before {
+    content: "🛡️";
     position: absolute;
     left: 0;
-    top: 1px;
-    font-size: 1.2em;
+    top: 3px;
+    font-size: 1.25rem;
 }
 .ip-box {
-    background: #181819;
-    padding: 10px 18px;
-    border-radius: 9px;
-    text-align: center;
-    font-weight: 700;
-    font-size: 1.2em;
-    letter-spacing: 1.7px;
-    color: var(--accent);
-    border: 2px dashed var(--accent-light);
-    margin: 26px auto 18px auto;
+    margin: 30px auto 28px;
+    font-weight: 900;
+    font-size: 1.4rem;
+    width: fit-content;
+    padding: 12px 28px;
+    border-radius: 14px;
+    color: var(--gradient-start);
+    border: 3px dashed var(--accent-light);
+    background: #181a27;
     user-select: all;
-    max-width: 240px;
+    transition: box-shadow 0.4s ease;
+    box-shadow: 0 0 16px rgba(255 112 77, 0.5);
+}
+.ip-box:hover {
+    box-shadow: 0 0 30px var(--shadow-glow);
+    cursor: copy;
+}
+.ip-copy-msg {
+    font-size: 1rem;
+    color: var(--accent-light);
+    text-align: center;
+    margin-top: -14px;
+    margin-bottom: 20px;
+    opacity: 0;
+    transition: opacity 0.8s ease;
     user-select: none;
 }
+.ip-copy-msg.visible {
+    opacity: 1;
+}
 .heroic-cta {
-    font-size: 1.15em;
+    font-size: 1.27rem;
+    font-weight: 700;
+    color: var(--accent-light);
+    margin-bottom: 28px;
     text-align: center;
-    margin-bottom: 18px;
-    color: #ffb18b;
-    font-weight: 600;
     user-select: none;
+    text-shadow: 0 0 12px rgba(255 180 130, 0.7);
 }
 .team-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 21px 16px;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 28px 22px;
+    justify-items: center;
 }
 .team-item {
-    background: #181819;
-    border-radius: 14px;
-    box-shadow: 0 0 12px #0006;
-    padding: 18px 14px 17px 14px;
-    text-align: center;
-    transition: transform 0.3s ease;
+    background: linear-gradient(145deg, #22253b, #1b1e31);
+    border-radius: 16px;
+    box-shadow: 0 8px 18px #0006;
     cursor: default;
-    user-select: none;
+    width: 180px;
+    text-align: center;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 .team-item:hover {
-    transform: scale(1.08);
-    box-shadow: 0 0 20px #ff7052cc;
+    transform: scale(1.07);
+    box-shadow: 0 0 30px 8px var(--shadow-glow);
+}
+.team-img-wrap {
+    position: relative;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 19px auto 18px;
+    box-shadow: 0 0 16px var(--shadow-glow);
+    border: 3.5px solid var(--accent);
+    background: #292d49;
+    transition: box-shadow 0.3s ease;
+}
+.team-img-wrap:hover {
+    box-shadow: 0 0 26px 6px var(--shadow-glow);
 }
 .team-img {
-    width: 78px;
-    height: 78px;
-    border-radius: 50%;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    margin: 0 auto 14px auto;
-    border: 3px solid var(--accent);
-    box-shadow: 0 0 10px #ff7052aa;
-    background: #23233a;
+    display: block;
+    filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.75));
+}
+.team-info {
+    padding: 0 16px 22px;
 }
 .team-role {
-    color: var(--accent);
     font-weight: 700;
-    font-size: 1.1em;
-    margin-bottom: 3px;
+    font-size: 1.05rem;
+    color: var(--accent);
+    margin-bottom: 6px;
+    user-select: none;
+    letter-spacing: 0.04em;
 }
 .team-name {
-    font-weight: 800;
-    font-size: 1.19em;
-    letter-spacing: 1.1px;
-    margin-bottom: 6px;
+    font-weight: 900;
+    font-size: 1.23rem;
     color: var(--accent-light);
+    margin-bottom: 8px;
+    letter-spacing: 0.18em;
+    user-select: none;
 }
 .team-desc {
-    font-size: 0.95em;
-    color: #ffaa8f;
-    line-height: 1.28em;
+    font-weight: 500;
+    font-size: 0.92rem;
+    color: #ffbf94cc;
+    user-select: none;
+    line-height: 1.38;
+    letter-spacing: 0.02em;
 }
 .gallery {
     display: flex;
-    gap: 18px;
+    gap: 22px;
     flex-wrap: wrap;
     justify-content: center;
-    margin: 18px 0 8px 0;
+    margin-bottom: 16px;
 }
 .gallery img {
-    width: 180px;
-    height: 100px;
-    border-radius: 14px;
+    width: 230px;
+    height: 130px;
+    border-radius: 20px;
+    box-shadow: 0 0 12px #000a;
     object-fit: cover;
-    box-shadow: 0 0 7px #0005;
     transition: transform 0.4s ease;
+    cursor: pointer;
+    user-select: none;
 }
 .gallery img:hover {
-    transform: scale(1.12);
+    transform: scale(1.07);
+    box-shadow: 0 0 24px var(--shadow-glow);
 }
 .contact-info {
-    margin-top: 4px;
-    font-size: 1.16em;
-    line-height: 1.35em;
+    font-size: 1.16rem;
+    line-height: 1.38;
+    text-align:center;
     user-select: text;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 .discord-link {
     color: var(--accent);
     font-weight: 700;
     text-decoration: none;
 }
+.discord-link:hover {
+    text-decoration: underline;
+}
 .footer {
-    color: #b9b3ab;
     text-align: center;
-    padding: 18px 7px 15px 7px;
-    font-size: 0.99em;
-    background: #202a38;
-    margin-top: 10px;
-    border-top: 1.2px solid #33374c;
+    padding: 20px 10px 18px;
+    font-size: 0.98rem;
+    color: var(--text-muted);
+    border-top: 1.2px solid #23254a;
     user-select: none;
 }
-@media (max-width: 675px) {
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 9px;
+}
+::-webkit-scrollbar-track {
+    background: var(--main-bg);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: 30px;
+    border: 3px solid var(--main-bg);
+}
+/* Responsive */
+@media(max-width:720px) {
     .team-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
     }
     .gallery img {
-        width: 150px;
-        height: 90px;
+        width: 100%;
+        max-width: 320px;
+        height: auto;
+        aspect-ratio: 16 / 9;
     }
-    .card {
-        max-width: 95vw;
-        padding: 2em 1.5em 1.8em 1.5em;
+    .content {
+        padding: 18px 18px 72px;
+    }
+}
+@media(max-width:420px){
+    .main-buttons {
+        flex-wrap: wrap;
     }
 }
 </style>
 </head>
 <body>
-
 <div class="content">
-
     <header>
-        <div class="logo-placeholder" aria-label="Logo StarSMP.eu" role="img">
-            <!-- místo pro logo, vlož zde svůj obrázek nahrazením v tagu níže -->
-            <!-- <img src="logo.png" alt="Logo StarSMP"> -->
+        <div class="logo-placeholder" aria-label="Logo StarSMP.eu" role="img" tabindex="0">
+            <!-- Místo pro logo - lze nahradit obrázkem -->
             ⭐️
         </div>
-        <h1>StarSMP.eu</h1>
-        <div class="subtitle">PvP klanové války • Bez survivalu • Minecraft 1.20+</div>
-        <div class="main-buttons" role="navigation" aria-label="Navigace sekcí stránky">
-            <button class="active" aria-current="page" onclick="switchTab('home', this)">🏠 Domů</button>
-            <button onclick="switchTab('team', this)">👥 Tým</button>
-            <button onclick="switchTab('gallery', this)">🖼️ Galerie</button>
-            <button onclick="switchTab('contact', this)">💬 Kontakt</button>
-        </div>
+        <h1 tabindex="0">StarSMP.eu</h1>
+        <div class="subtitle" tabindex="0">PvP klanové války • Bez survivalu • Minecraft 1.20+</div>
+
+        <nav class="main-buttons" role="navigation" aria-label="Navigace sekcí">
+            <button class="active" aria-current="page" type="button" onclick="switchTab('home', this)">🏠 Domů</button>
+            <button type="button" onclick="switchTab('team', this)">👥 Tým</button>
+            <button type="button" onclick="switchTab('gallery', this)">🖼️ Galerie</button>
+            <button type="button" onclick="switchTab('contact', this)">💬 Kontakt</button>
+        </nav>
     </header>
 
-    <section id="home" class="card active" tabindex="0" aria-live="polite" aria-label="Úvodní informace">
-        <img src="https://cdn.pixabay.com/photo/2017/01/31/13/14/minecraft-2025593_1280.png" alt="PvP Arena Minecraft" class="hero-img" />
+    <section id="home" class="card active" tabindex="0" aria-label="Úvodní sekce">
+        <img class="hero-img" src="https://cdn.pixabay.com/photo/2017/01/31/13/14/minecraft-2025593_1280.png" alt="Minecraft PvP Arena" />
         <div class="ip-box" tabindex="0" aria-label="IP adresa serveru">IP: play.starsmp.eu</div>
-        <div class="heroic-cta" aria-label="Motivační text">Zažij PvP bitvy na úrovni! Založ klan, rozdrť soupeře, ovládni leaderboard! 🏆</div>
+        <div class="ip-copy-msg" id="ipCopyMsg">Adresa zkopírována!</div>
+        <div class="heroic-cta" tabindex="0">Zažij PvP bitvy na úrovni! Založ klan, rozdrť soupeře, ovládni leaderboard! 🏆</div>
         <ul>
             <li>Týmová spolupráce v reálném čase</li>
             <li>Rychlé duely i masové klanové boje</li>
@@ -298,74 +370,97 @@ ul li::before {
         </ul>
     </section>
 
-    <section id="team" class="card" tabindex="0" aria-label="Sekce Tým serveru">
+    <section id="team" class="card" tabindex="0" aria-label="Sekce týmu">
         <h2>Náš tým</h2>
         <div class="team-grid">
-            <div class="team-item" tabindex="0" role="group" aria-label="Hlavní admin Tucnaczech">
-                <img src="https://i.pravatar.cc/80?u=tucnaczech" alt="Tucnaczech" class="team-img" loading="lazy" />
-                <div class="team-role">HLAVNÍ ADMIN</div>
-                <div class="team-name">Tucnaczech</div>
-                <div class="team-desc">Koordinace serveru & férová PvP komunita</div>
-            </div>
-            <div class="team-item" tabindex="0" role="group" aria-label="Majitel ownedbyshade">
-                <img src="https://i.pravatar.cc/80?u=ownedbyshade" alt="ownedbyshade" class="team-img" loading="lazy" />
-                <div class="team-role">MAJITEL</div>
-                <div class="team-name">ownedbyshade</div>
-                <div class="team-desc">Vývoj, ochrana a směr projektu</div>
-            </div>
-            <div class="team-item" tabindex="0" role="group" aria-label="Majitel paldes12">
-                <img src="https://i.pravatar.cc/80?u=paldes12" alt="paldes12" class="team-img" loading="lazy" />
-                <div class="team-role">MAJITEL</div>
-                <div class="team-name">paldes12</div>
-                <div class="team-desc">Vývoj, ochrana a směr projektu</div>
-            </div>
-            <div class="team-item" tabindex="0" role="group" aria-label="Hlavní builder RuzovyKrtek">
-                <img src="https://i.pravatar.cc/80?u=ruzovykrtek" alt="RuzovyKrtek" class="team-img" loading="lazy" />
-                <div class="team-role">HLAVNÍ BUILDER</div>
-                <div class="team-name">RuzovyKrtek</div>
-                <div class="team-desc">PvP mapy a arény design</div>
-            </div>
-            <div class="team-item" tabindex="0" role="group" aria-label="Helper SaliClientV2">
-                <img src="https://i.pravatar.cc/80?u=saliclientv2" alt="SaliClientV2" class="team-img" loading="lazy" />
-                <div class="team-role">HELPER</div>
-                <div class="team-name">SaliClientV2</div>
-                <div class="team-desc">Podpora hráčů & řešení dotazů</div>
-            </div>
-            <div class="team-item" tabindex="0" role="group" aria-label="El. developer Ar0n1s_">
-                <img src="https://i.pravatar.cc/80?u=aron1s" alt="Ar0n1s_" class="team-img" loading="lazy" />
-                <div class="team-role">EL. DEVELOPER</div>
-                <div class="team-name">Ar0n1s_</div>
-                <div class="team-desc">Pluginy & PvP systémy</div>
-            </div>
+            <article class="team-item" tabindex="0" role="group" aria-label="Hlavní admin Tucnaczech">
+                <div class="team-img-wrap" title="Tucnaczech">
+                    <img class="team-img" loading="lazy" src="https://i.pravatar.cc/140?u=tucnaczech" alt="Tucnaczech" />
+                </div>
+                <div class="team-info">
+                    <div class="team-role">HLAVNÍ ADMIN</div>
+                    <div class="team-name">Tucnaczech</div>
+                    <div class="team-desc">Koordinace serveru & férová PvP komunita</div>
+                </div>
+            </article>
+            <article class="team-item" tabindex="0" role="group" aria-label="Majitel ownedbyshade">
+                <div class="team-img-wrap" title="ownedbyshade">
+                    <img class="team-img" loading="lazy" src="https://i.pravatar.cc/140?u=ownedbyshade" alt="ownedbyshade" />
+                </div>
+                <div class="team-info">
+                    <div class="team-role">MAJITEL</div>
+                    <div class="team-name">ownedbyshade</div>
+                    <div class="team-desc">Vývoj, ochrana a směr projektu</div>
+                </div>
+            </article>
+            <article class="team-item" tabindex="0" role="group" aria-label="Majitel paldes12">
+                <div class="team-img-wrap" title="paldes12">
+                    <img class="team-img" loading="lazy" src="https://i.pravatar.cc/140?u=paldes12" alt="paldes12" />
+                </div>
+                <div class="team-info">
+                    <div class="team-role">MAJITEL</div>
+                    <div class="team-name">paldes12</div>
+                    <div class="team-desc">Vývoj, ochrana a směr projektu</div>
+                </div>
+            </article>
+            <article class="team-item" tabindex="0" role="group" aria-label="Hlavní builder RuzovyKrtek">
+                <div class="team-img-wrap" title="RuzovyKrtek">
+                    <img class="team-img" loading="lazy" src="https://i.pravatar.cc/140?u=ruzovykrtek" alt="RuzovyKrtek" />
+                </div>
+                <div class="team-info">
+                    <div class="team-role">HLAVNÍ BUILDER</div>
+                    <div class="team-name">RuzovyKrtek</div>
+                    <div class="team-desc">PvP mapy a arény design</div>
+                </div>
+            </article>
+            <article class="team-item" tabindex="0" role="group" aria-label="Helper SaliClientV2">
+                <div class="team-img-wrap" title="SaliClientV2">
+                    <img class="team-img" loading="lazy" src="https://i.pravatar.cc/140?u=saliclientv2" alt="SaliClientV2" />
+                </div>
+                <div class="team-info">
+                    <div class="team-role">HELPER</div>
+                    <div class="team-name">SaliClientV2</div>
+                    <div class="team-desc">Podpora hráčů & řešení dotazů</div>
+                </div>
+            </article>
+            <article class="team-item" tabindex="0" role="group" aria-label="El. developer Ar0n1s_">
+                <div class="team-img-wrap" title="Ar0n1s_">
+                    <img class="team-img" loading="lazy" src="https://i.pravatar.cc/140?u=aron1s" alt="Ar0n1s_" />
+                </div>
+                <div class="team-info">
+                    <div class="team-role">EL. DEVELOPER</div>
+                    <div class="team-name">Ar0n1s_</div>
+                    <div class="team-desc">Pluginy & PvP systémy</div>
+                </div>
+            </article>
         </div>
-        <div style="color:#ffa68f; margin-top: 20px; text-align:center; font-weight:600; font-size:1.06em;">
-            Náš tým je vždy aktivní a připraven podpořit komunitu!
+        <div style="margin-top: 24px; text-align:center; font-weight: 600; font-size: 1.07rem; color: var(--accent-light);">
+            Náš tým je vždy aktivní a připravený podpořit komunitu!
         </div>
     </section>
 
     <section id="gallery" class="card" tabindex="0" aria-label="Galerie PvP momentek">
         <h2>Galerie</h2>
-        <div class="gallery">
-            <img src="https://cdn.pixabay.com/photo/2016/10/18/17/46/minecraft-1755784_960_720.png" alt="PvP fight screenshot" loading="lazy" />
-            <img src="https://cdn.pixabay.com/photo/2022/09/16/16/33/minecraft-7459197_1280.jpg" alt="PvP event screenshot" loading="lazy" />
-            <img src="https://cdn.pixabay.com/photo/2017/01/31/13/14/minecraft-2025593_960_720.png" alt="PvP arena screenshot" loading="lazy" />
+        <div class="gallery" role="list">
+            <img loading="lazy" role="listitem" alt="PvP fight screenshot" src="https://cdn.pixabay.com/photo/2016/10/18/17/46/minecraft-1755784_960_720.png" />
+            <img loading="lazy" role="listitem" alt="PvP event screenshot" src="https://cdn.pixabay.com/photo/2022/09/16/16/33/minecraft-7459197_1280.jpg" />
+            <img loading="lazy" role="listitem" alt="PvP arena screenshot" src="https://cdn.pixabay.com/photo/2017/01/31/13/14/minecraft-2025593_960_720.png" />
         </div>
-        <div style="text-align:center; color:#ffc899; margin-top: 9px; font-size: 1.02em;">
+        <div style="text-align:center; margin-top: 10px; font-weight:600; color: var(--accent-light); user-select:none;">
             Máš momentky z našich bitev? Sdílej je s námi na Discordu!
         </div>
     </section>
 
-    <section id="contact" class="card" tabindex="0" aria-label="Kontaktní informace a Discord odkazy">
+    <section id="contact" class="card" tabindex="0" aria-label="Sekce kontaktů a komunity">
         <h2>Kontakt & komunita</h2>
         <div class="contact-info">
             Připoj se k naší PvP komunitě na Discordu:<br />
-            <a href="https://dsc.gg/starsmp" target="_blank" class="discord-link" rel="noopener">dsc.gg/starsmp</a><br /><br />
+            <a href="https://dsc.gg/starsmp" target="_blank" rel="noopener" class="discord-link">dsc.gg/starsmp</a><br /><br />
             Nebo napiš na e-mail:<br />
             <a href="mailto:info@starsmp.eu" class="discord-link">info@starsmp.eu</a><br /><br />
             Sleduj nás na sociálních sítích a neuniknou ti žádné aktuality!
         </div>
     </section>
-
 </div>
 
 <footer class="footer" role="contentinfo">
@@ -373,23 +468,31 @@ ul li::before {
 </footer>
 
 <script>
-    function switchTab(tabId, btn) {
-        const cards = document.querySelectorAll('.card');
-        cards.forEach(card => {
-            if(card.id === tabId){
-                card.classList.add('active');
-                card.setAttribute('tabindex', '0');
-            } else {
-                card.classList.remove('active');
-                card.removeAttribute('tabindex');
-            }
-        });
-        const buttons = document.querySelectorAll('.main-buttons button');
-        buttons.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        // Set focus for accessibility
-        document.getElementById(tabId).focus();
-    }
+function switchTab(tabId, btn) {
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => {
+        if(card.id === tabId) {
+            card.classList.add('active');
+            card.setAttribute('tabindex','0');
+            card.focus();
+        } else {
+            card.classList.remove('active');
+            card.removeAttribute('tabindex');
+        }
+    });
+    const buttons = document.querySelectorAll('.main-buttons button');
+    buttons.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+}
+// Kopírování IP
+const ipBox = document.querySelector('.ip-box');
+const ipCopyMsg = document.getElementById('ipCopyMsg');
+ipBox.addEventListener('click', () => {
+    navigator.clipboard.writeText(ipBox.textContent).then(() => {
+        ipCopyMsg.classList.add('visible');
+        setTimeout(() => ipCopyMsg.classList.remove('visible'), 2000);
+    });
+});
 </script>
 
 </body>
